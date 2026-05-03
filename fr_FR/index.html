@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pinkoc</title>
+    <link rel="icon" href="Pinkoc.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Candara, 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Cascadia Code';
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2a4d69, #4b86b4);
+            background-attachment: fixed;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 64px;
+            height: 64px;
+            margin-right: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #ff0008, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(255, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        nav ul li {
+            margin-left: 0;
+        }
+        
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .globe-btn {
+            background: rgba(255, 255, 255, 0.08);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 1.6rem;
+            color: #fad0c4;
+        }
+        
+        .globe-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05) rotate(5deg);
+            color: #fff;
+            box-shadow: 0 0 12px rgba(255, 154, 158, 0.5);
+        }
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0;
+            flex-wrap: wrap;
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+        
+        .hero-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: #1a1a2e;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-right: 15px;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .features {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(40, 40, 60, 0.8);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .server-info {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .info-card {
+            background: rgba(30, 30, 46, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #fad0c4;
+        }
+        
+        .info-card p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a2a6c, #2a4d69);
+            width: 90%;
+            max-width: 550px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            animation: modalAppear 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+        
+        .lang-modal .modal-content {
+            max-width: 850px;
+            width: 90%;
+        }
+        
+        @keyframes modalAppear {
+            from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        
+        .modal-header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-header h3 {
+            font-size: 1.9rem;
+            color: #ffffff;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .modal-subtitle {
+            color: #fad0c4;
+            font-size: 1rem;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #e0e0e0;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        
+        .close-modal:hover {
+            color: #ff9a9e;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 35px 30px;
+        }
+        
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 22px;
+        }
+        
+        .lang-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 20px 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(2px);
+        }
+        
+        .lang-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-6px);
+            border-color: #ff9a9e;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .lang-card a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+        }
+        
+        .lang-icon {
+            font-size: 2.6rem;
+            background: linear-gradient(145deg, #ffe6e6, #ffb6b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .lang-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .lang-native {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        
+        .join-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        
+        .join-option {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .join-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .join-option i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .join-option h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .join-option p {
+            font-size: 0.95rem;
+            color: #cccccc;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        .join-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: #1a1a2e;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 200px;
+        }
+        
+        .join-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-footer {
+            padding: 20px 30px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #aaaaaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .lang-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .modal-body {
+                padding: 25px 20px;
+            }
+            .globe-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4rem;
+            }
+            nav ul li a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lang-grid {
+                grid-template-columns: 1fr;
+            }
+            .lang-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="LOGO.png" alt="Logo Pinkoc">
+                <h1>Pinkoc</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="https://91dw.pinkoc.top"><i class="fas fa-info-circle"></i> PinFiles</a></li>
+                    <li><a href="server.html"><i class="fas fa-users"></i> Serveur</a></li>
+                    <li><a href="114.html"><i class="fas fa-cogs"></i> Projet</a></li>
+                </ul>
+                <div class="globe-btn" id="globeLangBtn" aria-label="Changer de langue">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h2>Bienvenue sur Pinkoc</h2>
+                <a href="sb.html">Vidéo poubelle tous les jours</a>
+                <p>Chut🤫Aime bricoler des trucs🤔</p>
+                <p>Tu aimes manger de la merde ?💀Viens ici🤓Nous sommes des producteurs de merde😍</p>
+                <a href="#" id="joinBtn" class="btn">Rejoins-nous</a>
+                <a href="maps.html" class="btn">Serveur mondial</a>
+            </div>
+            <div class="hero-image">
+                <img src="pinkoclol.png" alt="Exposition de merde Pinkoc">
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Nous avons</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Serveur bas de gamme</h3>
+                    <p>Nos quatre serveurs utilisent un CPU Pentium II, 128 Mo de RAM, une clé USB 1.0 et une bande passante de 1Mbps pour garantir ta mauvaise expérience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Pas d'argent</h3>
+                    <p>Nous n'avons pas un sou 😭 Parce que le serveur nous dit : "Tu me manques".</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Communauté vulgaire</h3>
+                    <p>Communauté vulgaire avec une équipe vulgaire, baise tout.</p>
+                </div>
+            </div>
+        </section>
+
+        <div id="joinModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Rejoindre Pinkoc</h3>
+                    <p class="modal-subtitle">Mon frère, rejoins-nous pour devenir esclave</p>
+                    <button class="close-modal" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="join-options">
+                        <div class="join-option">
+                            <i class="fab fa-qq"></i>
+                            <h4>Rejoindre le groupe QQ</h4>
+                            <a href="https://qm.qq.com/q/xbsKUer1ks" target="_blank" class="join-btn">Rejoindre maintenant</a>
+                        </div>
+                        <div class="join-option">
+                            <i class="fab fa-discord"></i>
+                            <h4>Rejoindre Discord</h4>
+                            <a href="https://discord.gg/aGJXhF2j" target="_blank" class="join-btn">Rejoindre maintenant</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p>yzy est gay</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="langModal" class="modal lang-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fas fa-language"></i>
+                    <p class="modal-subtitle">Choisir la langue😭</p>
+                    <button class="close-modal" id="closeLangModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="lang-grid">
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/" rel="nofollow">
+                                <div class="lang-icon"> 🇨🇳</div>
+                                <div class="lang-name">Chinois simplifié</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/zh_HK" rel="nofollow">
+                                <div class="lang-icon"> 🇭🇰</div>
+                                <div class="lang-name">Chinois traditionnel</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/en_us" rel="nofollow">
+                                <div class="lang-icon"> 🇺🇸</div>
+                                <div class="lang-name">Anglais</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/ja_jp" rel="nofollow">
+                                <div class="lang-icon"> 🇯🇵</div>
+                                <div class="lang-name">Japonais</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/ko_KR" rel="nofollow">
+                                <div class="lang-icon"> 🇰🇷</div>
+                                <div class="lang-name">Coréen</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/de_DE" rel="nofollow">
+                                <div class="lang-icon"> 🇩🇪</div>
+                                <div class="lang-name">Allemand</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/fr_FR" rel="nofollow">
+                                <div class="lang-icon"> 🇫🇷</div>
+                                <div class="lang-name">Français</div>
+                            </a>
+                        </div>
+                        <div class="lang-card">
+                            <a href="https://www.pinkoc.top/es_ES" rel="nofollow">
+                                <div class="lang-icon"> 🇪🇸</div>
+                                <div class="lang-name">Espagnol</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p>🌐 Cliquez pour changer la version linguistique</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const joinBtn = document.getElementById('joinBtn');
+        const joinModal = document.getElementById('joinModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        
+        const globeBtn = document.getElementById('globeLangBtn');
+        const langModal = document.getElementById('langModal');
+        const closeLangModalBtn = document.getElementById('closeLangModal');
+        
+        function closeAllModals() {
+            if (joinModal) joinModal.style.display = 'none';
+            if (langModal) langModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function openJoinModal() {
+            closeAllModals();
+            if (joinModal) {
+                joinModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function openLangModal() {
+            closeAllModals();
+            if (langModal) {
+                langModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        if (joinBtn) {
+            joinBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openJoinModal();
+            });
+        }
+        
+        if (globeBtn) {
+            globeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                openLangModal();
+            });
+        }
+        
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', function() {
+                closeAllModals();
+            });
+        }
+        
+        if (closeLangModalBtn) {
+            closeLangModalBtn.addEventListener('click', function() {
+                closeAllModals();
+            });
+        }
+        
+        if (joinModal) {
+            joinModal.addEventListener('click', function(e) {
+                if (e.target === joinModal) {
+                    closeAllModals();
+                }
+            });
+        }
+        
+        if (langModal) {
+            langModal.addEventListener('click', function(e) {
+                if (e.target === langModal) {
+                    closeAllModals();
+                }
+            });
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if ((joinModal && joinModal.style.display === 'flex') || (langModal && langModal.style.display === 'flex')) {
+                    closeAllModals();
+                }
+            }
+        });
+        
+        const langLinks = document.querySelectorAll('.lang-card a');
+        langLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                closeAllModals();
+            });
+        });
+        
+        window.addEventListener('load', function() {
+            closeAllModals();
+        });
+        
+        console.log("Pinkoc — 地球图标已添加，八个语言超链接就绪 🌍💩");
+    </script>
+</body>
+</html>
