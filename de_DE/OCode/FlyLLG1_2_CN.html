@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>起飞模拟器</title>
+    <link rel="icon" href="Pinkoc.ico" type="image/x-icon">
+    <style>
+        body {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; text-align:center; padding-top:50px;}
+        #gameArea {margin:0 auto; width:300px;}
+        #counterBtn{
+            width:200px; height:60px; font-size:24px;
+            background:#4CAF50; color:#fff; border:none; border-radius:8px;
+            cursor:pointer;
+        }
+        #msg{margin-top:20px; font-size:18px; color:#333;}
+        #parentOverlay{
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.7); color:#fff; display:none;
+            align-items:center; justify-content:center; flex-direction:column;
+            font-size:22px; z-index:1000;
+        }
+        #parentOverlay button{
+            margin-top:20px; padding:10px 20px; font-size:18px;
+        }
+        #difficultySelect {
+            font-size:18px; margin-bottom:20px; padding:8px 12px;
+        }
+        #english-link {
+            position:absolute; top:10px; right:30px; font-size:18px;
+        }
+    </style>
+</head>
+<body>
+<a id="english-link" href="FlyLLG_1_2_EN.html" target="_blank">English</a>
+<div id="gameArea">
+    <select id="difficultySelect">
+        <option value="simple">简单</option>
+        <option value="easy">普通</option>
+        <option value="normal">困难</option>
+    </select>
+    <button id="counterBtn">起飞！ (0/100)</button>
+    <div id="msg"></div>
+</div>
+
+<div id="parentOverlay">
+    <div>父母进入卧室！请在 <span id="timer">3</span> 秒内提裤子</div>
+    <button id="hideBtn">提裤子</button>
+</div>
+
+<script>
+    const btn = document.getElementById('counterBtn');
+    const msg = document.getElementById('msg');
+    const overlay = document.getElementById('parentOverlay');
+    const hideBtn = document.getElementById('hideBtn');
+    const timerSpan = document.getElementById('timer');
+    const difficultySelect = document.getElementById('difficultySelect');
+
+    let count = 0;
+    let gameOver = false;
+    let parentTimer = null;
+
+    const DIFFICULTY = {
+        simple: {
+            max: 100,           
+            parentChance: 0.03,
+            checkChance: 0.00, 
+            label: '简单',
+        },
+        easy: {
+            max: 300,
+            parentChance: 0.10,
+            checkChance: 0.01,
+            label: '普通',
+        },
+        normal: {
+            max: 500,
+            parentChance: 0.60,
+            checkChance: 0.04,
+            label: '困难',
+        }
+    };
+
+    let currentDifficulty = 'simple';
+
+    function updateBtnText() {
+        let max = DIFFICULTY[currentDifficulty].max;
+        btn.textContent = `起飞！ (${count}/${max})`;
+    }
+
+    difficultySelect.addEventListener('change', function() {
+        currentDifficulty = this.value;
+        count = 0;
+        gameOver = false;
+        overlay.style.display = 'none';
+        btn.disabled = false;
+        msg.textContent = '';
+        msg.style.color = '#333';
+        updateBtnText();
+    });
+
+    btn.addEventListener('click', () => {
+        if (gameOver) return;
+
+        count++;
+        updateBtnText();
+
+        let diffCfg = DIFFICULTY[currentDifficulty];
+
+        if (count >= diffCfg.max) {
+            endGame(true, `恭喜！你成功起飞了，${diffCfg.label}难度获胜！`);
+            return;
+        }
+
+        if (Math.random() < diffCfg.parentChance) {
+            triggerParentEvent();
+            return;
+        }
+
+        if (diffCfg.checkChance > 0 && Math.random() < diffCfg.checkChance) {
+            endGame(false, '突击检查！你被发现了，游戏结束！');
+            return;
+        }
+    });
+
+    function triggerParentEvent() {
+        overlay.style.display = 'flex';
+        let seconds = 3;
+        timerSpan.textContent = seconds;
+
+        parentTimer = setInterval(() => {
+            seconds--;
+            timerSpan.textContent = seconds;
+            if (seconds === 0) {
+                clearInterval(parentTimer);
+                endGame(false, '父母发现了你，游戏失败！');
+            }
+        }, 1000);
+    }
+
+    hideBtn.addEventListener('click', () => {
+        if (gameOver) return;
+        clearInterval(parentTimer);
+        overlay.style.display = 'none';
+
+        if (Math.random() < 0.03) {
+            endGame(false, '父母发现，游戏失败！');
+        } else {
+            msg.textContent = '成功躲过父母！再快点啊！';
+        }
+    });
+
+    function endGame(victory, text) {
+        gameOver = true;
+        overlay.style.display = 'none';
+        btn.disabled = true;
+        msg.textContent = text;
+        msg.style.color = victory ? 'green' : 'red';
+    }
+
+    updateBtnText();
+</script>
+</body>
+
+</html>
