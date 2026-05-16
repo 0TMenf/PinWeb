@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -149,7 +149,7 @@
     });
     
     const gaodeTileLayer = L.tileLayer('https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
-        attribution: '&copy; <a href="https://www.amap.com/">高德地图</a> GS(2024)1232号',
+        attribution: '&copy; <a href="https://www.amap.com/">高德地图</a> GS(2024)1232號',
         maxZoom: 18,
         minZoom: 1,
     });
@@ -268,6 +268,7 @@
             project: "PmCap",
             serviceType: "minecraft"
         },
+        // ========== 香港节点 - 已修正坐标 ==========
         {
             city: "香港", country: "中国香港", lat: 22.3193, lng: 114.1694,
             role: "Pinkoc 服务器加速节点😭",
@@ -288,27 +289,6 @@
             details: "PinFiles CDN🤔",
             project: "PfCDN",
             serviceType: "download"
-        },
-        {
-            city: "台北", country: "中国台湾", lat: 25.0330, lng: 121.5654,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
-            project: "PmCap",
-            serviceType: "minecraft"
-        },
-        {
-            city: "北京", country: "中国北京", lat: 39.9042, lng: 116.4074,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
-            project: "PmCap",
-            serviceType: "minecraft"
-        },
-        {
-            city: "大连", country: "中国辽宁", lat: 38.9140, lng: 121.6147,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
-            project: "PmCap",
-            serviceType: "minecraft"
         },
         // =========================================
         {
@@ -352,7 +332,7 @@
         const customIcon = getIconByServiceType(node.serviceType);
         const marker = L.marker([node.lat, node.lng], {
             icon: customIcon,
-            title: `${node.city}, ${node.country} - ${node.serviceType === 'minecraft' ? '🎮 Minecraft服务器' : (node.serviceType === 'web' ? '🌐 网站服务' : '☁️ 下载服务')}`,
+            title: `${node.city}, ${node.country} - ${node.serviceType === 'minecraft' ? '🎮 Minecraft服务器' : (node.serviceType === 'web' ? '🌐 网站服務' : '☁️ 下载服務')}`,
             riseOnHover: true
         });
         
@@ -443,7 +423,7 @@
     if (infoDiv) {
         infoDiv.innerHTML = `🧩 Pinkoc · 总计${globalNodes.length}个节点 | 🟩Minecraft:${mcCount}  🌐网站:${webCount}  ☁️下载:${dlCount}`;
     }
-    
+
     console.log(`地图加载完成，包含 ${globalNodes.length} 个项目节点。Minecraft:${mcCount}, 网站:${webCount}, 下载:${dlCount}`);
 </script>
 </body>

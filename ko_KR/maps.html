@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+﻿<!DOCTYPE html>
+<html lang="ko-KR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Pinkoc 全球节点😭</title>
+    <title>Pinkoc 글로벌 노드😭</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
@@ -132,24 +132,24 @@
 
 <div class="map-toggle-panel">
     <button id="btn-osm" class="toggle-btn active">🌍 OpenStreetMap</button>
-    <button id="btn-gaode" class="toggle-btn">🇨🇳 高德地图</button>
+    <button id="btn-gaode" class="toggle-btn">🇨🇳 Gaode 지도</button>
 </div>
 <div class="info-credit">
-    Pinkoc 全球节点😭
+    Pinkoc 글로벌 노드😭
 </div>
 
 <script>
     const map = L.map('map').setView([20, 0], 2);
     
     const osmTileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 贡献者',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 貢獻者',
         subdomains: 'abc',
         maxZoom: 19,
         minZoom: 1
     });
     
     const gaodeTileLayer = L.tileLayer('https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
-        attribution: '&copy; <a href="https://www.amap.com/">高德地图</a> GS(2024)1232号',
+        attribution: '&copy; <a href="https://www.amap.com/">Gaode 지도</a> GS(2024)1232號',
         maxZoom: 18,
         minZoom: 1,
     });
@@ -248,43 +248,43 @@
     
     const globalNodes = [
         {
-            city: "镇江", country: "中国江苏", lat: 32.2044, lng: 119.4550,
-            role: "Pinkoc 主服😱",
-            details: "Minecraft 主服😱",
+            city: "鎮江", country: "中國江蘇", lat: 32.2044, lng: 119.4550,
+            role: "Pinkoc 메인 서버😱",
+            details: "Minecraft 메인 서버😱",
             project: "PmC",
             serviceType: "minecraft"
         },
         {
-            city: "广州", country: "中国广东", lat: 23.1291, lng: 113.2644,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
+            city: "廣州", country: "中國廣東", lat: 23.1291, lng: 113.2644,
+            role: "Pinkoc 가속 노드😭",
+            details: "Minecraft 가속 노드😭",
             project: "PmCap",
             serviceType: "minecraft"
         },
         {
-            city: "武汉", country: "中国湖北", lat: 30.5928, lng: 114.3055,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
+            city: "武漢", country: "中國湖北", lat: 30.5928, lng: 114.3055,
+            role: "Pinkoc 가속 노드😭",
+            details: "Minecraft 가속 노드😭",
             project: "PmCap",
             serviceType: "minecraft"
         },
-        // ========== 香港节点 - 已修正坐标 ==========
+        // ========== 香港節點 - 已修正坐標 ==========
         {
-            city: "香港", country: "中国香港", lat: 22.3193, lng: 114.1694,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
+            city: "香港", country: "中國香港", lat: 22.3193, lng: 114.1694,
+            role: "Pinkoc 가속 노드😭",
+            details: "Minecraft 가속 노드😭",
             project: "PmCap",
             serviceType: "minecraft"
         },
         {
-            city: "香港", country: "中国香港", lat: 22.3198, lng: 114.1699,
+            city: "香港", country: "中國香港", lat: 22.3198, lng: 114.1699,
             role: "PinWeb CDN🤔",
             details: "PinWeb CDN🤔",
             project: "PwCDN",
             serviceType: "web"
         },
         {
-            city: "香港", country: "中国香港", lat: 22.3188, lng: 114.1689,
+            city: "香港", country: "中國香港", lat: 22.3188, lng: 114.1689,
             role: "PinFiles CDN🤔",
             details: "PinFiles CDN🤔",
             project: "PfCDN",
@@ -292,35 +292,35 @@
         },
         // =========================================
         {
-            city: "纽约", country: "美国", lat: 40.6128, lng: -74.0060,
+            city: "紐約", country: "美國", lat: 40.6128, lng: -74.0060,
             role: "PinWeb CDN🤔",
             details: "PinWeb CDN🤔",
             project: "PwCDN",
             serviceType: "web"
         },
         {
-            city: "纽约", country: "美国", lat: 40.7130, lng: -74.0100,
+            city: "紐約", country: "美國", lat: 40.7130, lng: -74.0100,
             role: "PinFiles CDN🤔",
             details: "PinFiles CDN🤔",
             project: "PfCDN",
             serviceType: "download"
         },
         {
-            city: "东京", country: "日本", lat: 35.6895, lng: 139.6917,
-            role: "Pinkoc 服务器加速节点😭",
-            details: "Minecraft 加速节点😭",
+            city: "東京", country: "日本", lat: 35.6895, lng: 139.6917,
+            role: "Pinkoc 가속 노드😭",
+            details: "Minecraft 가속 노드😭",
             project: "PmCap",
             serviceType: "minecraft"
         },
         {
-            city: "纽约", country: "美国", lat: 40.8138, lng: -74.0160,
+            city: "紐約", country: "美國", lat: 40.8138, lng: -74.0160,
             role: "Clash😨",
-            details: "给_Menf_用的代理😎",
+            details: "_Menf_용 프록시😎",
             project: "AmPf",
             serviceType: "web"
         },
         {
-            city: "旧金山", country: "美国", lat: 37.7749, lng: -122.4194,
+            city: "舊金山", country: "美國", lat: 37.7749, lng: -122.4194,
             role: "PinFiles CDN🤔",
             details: "PinFiles CDN🤔",
             project: "PfCDN",
@@ -332,7 +332,7 @@
         const customIcon = getIconByServiceType(node.serviceType);
         const marker = L.marker([node.lat, node.lng], {
             icon: customIcon,
-            title: `${node.city}, ${node.country} - ${node.serviceType === 'minecraft' ? '🎮 Minecraft服务器' : (node.serviceType === 'web' ? '🌐 网站服务' : '☁️ 下载服务')}`,
+            title: `${node.city}, ${node.country} - ${node.serviceType === 'minecraft' ? '🎮 Minecraft伺服器' : (node.serviceType === 'web' ? '🌐 網站服務' : '☁️ 下載服務')}`,
             riseOnHover: true
         });
         
@@ -421,10 +421,10 @@
     const dlCount = globalNodes.filter(n => n.serviceType === 'download').length;
     const infoDiv = document.querySelector('.info-credit');
     if (infoDiv) {
-        infoDiv.innerHTML = `🧩 Pinkoc · 总计${globalNodes.length}个节点 | 🟩Minecraft:${mcCount}  🌐网站:${webCount}  ☁️下载:${dlCount}`;
+        infoDiv.innerHTML = `🧩 Pinkoc · 總計${globalNodes.length}個節點 | 🟩Minecraft:${mcCount}  🌐網站:${webCount}  ☁️下載:${dlCount}`;
     }
-    
-    console.log(`地图加载完成，包含 ${globalNodes.length} 个项目节点。Minecraft:${mcCount}, 网站:${webCount}, 下载:${dlCount}`);
+
+    console.log(`地圖載入完成，包含 ${globalNodes.length} 個項目節點。Minecraft:${mcCount}, 網站:${webCount}, 下載:${dlCount}`);
 </script>
 </body>
 </html>
