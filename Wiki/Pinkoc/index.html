@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页 - Wiki 文档</title>
+    <style>
+        /* ============================================================
+           主题变量：浅色（默认）与深色
+           ============================================================ */
+        :root,
+        [data-theme="light"] {
+            --bg-body: #f6f8fa;
+            --bg-sidebar: #ffffff;
+            --bg-sidebar-header: #f8f9fa;
+            --bg-content: #ffffff;
+            --bg-content-header: #fafbfc;
+            --bg-content-footer: #fafbfc;
+            --bg-hover: #f0f2f5;
+            --bg-active: #e8edf5;
+            --bg-dropdown: #f8f9fa;
+            --text-primary: #24292e;
+            --text-secondary: #57606a;
+            --text-sidebar: #1f2328;
+            --text-sidebar-hover: #0d1117;
+            --text-sidebar-active: #0d1117;
+            --text-muted: #8b949e;
+            --text-footer: #6a7a8a;
+            --border-color: #d0d7de;
+            --border-light: #eaeef2;
+            --border-sidebar: #e1e4e8;
+            --shadow-sidebar: 2px 0 12px rgba(0, 0, 0, 0.08);
+            --accent: #0969da;
+            --accent-light: #ddf4ff;
+            --accent-border: #0969da;
+            --code-bg: #f6f8fa;
+            --code-color: #d63384;
+            --blockquote-bg: #f6f8fa;
+            --blockquote-border: #0969da;
+            --table-header-bg: #f6f8fa;
+            --table-border: #d0d7de;
+            --table-stripe: #fafbfc;
+            --note-bg: #f0f4ff;
+            --note-border: #d0d9f0;
+            --note-color: #1a2a5a;
+            --scrollbar-track: #f0f2f5;
+            --scrollbar-thumb: #d0d5dd;
+            --scrollbar-thumb-hover: #b0b8c4;
+            --nav-link-bg: #ffffff;
+            --nav-link-border: #d0d7de;
+            --nav-link-color: #24292e;
+            --nav-link-hover-bg: #f0f2f5;
+            --nav-link-hover-border: #b0b8c4;
+            --nav-link-disabled-opacity: 0.4;
+            --link-placeholder-color: #0969da;
+            --link-placeholder-hover-bg: rgba(9, 105, 218, 0.08);
+            --breadcrumb-color: #57606a;
+            --breadcrumb-accent: #0969da;
+            --dropdown-arrow: #8b949e;
+            --sidebar-footer-color: #6a6a82;
+            --theme-icon: '☀️';
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0d1117;
+            --bg-sidebar: #161b22;
+            --bg-sidebar-header: #1c2128;
+            --bg-content: #0d1117;
+            --bg-content-header: #161b22;
+            --bg-content-footer: #161b22;
+            --bg-hover: #1c2128;
+            --bg-active: #1c2a4a;
+            --bg-dropdown: #1c2128;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-sidebar: #c9d1d9;
+            --text-sidebar-hover: #f0f6fc;
+            --text-sidebar-active: #f0f6fc;
+            --text-muted: #484f58;
+            --text-footer: #8b949e;
+            --border-color: #30363d;
+            --border-light: #21262d;
+            --border-sidebar: #30363d;
+            --shadow-sidebar: 2px 0 12px rgba(0, 0, 0, 0.5);
+            --accent: #58a6ff;
+            --accent-light: #1c2a4a;
+            --accent-border: #58a6ff;
+            --code-bg: #161b22;
+            --code-color: #f0883e;
+            --blockquote-bg: #161b22;
+            --blockquote-border: #58a6ff;
+            --table-header-bg: #161b22;
+            --table-border: #30363d;
+            --table-stripe: #0d1117;
+            --note-bg: #1c2a4a;
+            --note-border: #2d4a7a;
+            --note-color: #c9d1d9;
+            --scrollbar-track: #161b22;
+            --scrollbar-thumb: #30363d;
+            --scrollbar-thumb-hover: #484f58;
+            --nav-link-bg: #21262d;
+            --nav-link-border: #30363d;
+            --nav-link-color: #c9d1d9;
+            --nav-link-hover-bg: #30363d;
+            --nav-link-hover-border: #484f58;
+            --nav-link-disabled-opacity: 0.3;
+            --link-placeholder-color: #58a6ff;
+            --link-placeholder-hover-bg: rgba(88, 166, 255, 0.12);
+            --breadcrumb-color: #8b949e;
+            --breadcrumb-accent: #58a6ff;
+            --dropdown-arrow: #8b949e;
+            --sidebar-footer-color: #8b949e;
+            --theme-icon: '🌙';
+        }
+
+        /* ============================================================
+           全局重置 & 基础
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* ============================================================
+           整体布局
+           ============================================================ */
+        .wiki-container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* ============================================================
+           左侧目录
+           ============================================================ */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow-sidebar);
+            position: relative;
+            z-index: 10;
+            border-right: 1px solid var(--border-sidebar);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px 18px;
+            border-bottom: 1px solid var(--border-sidebar);
+            flex-shrink: 0;
+            background: var(--bg-sidebar-header);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-sidebar);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-header h2 span {
+            font-weight: 300;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-left: auto;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 0 20px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
+        /* 目录项 */
+        .nav-item {
+            display: block;
+            padding: 10px 20px 10px 24px;
+            font-size: 14px;
+            color: var(--text-sidebar);
+            text-decoration: none;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+            line-height: 1.4;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-sidebar-hover);
+            text-decoration: none;
+        }
+
+        .nav-item.active {
+            background: var(--bg-active);
+            color: var(--text-sidebar-active);
+            border-left-color: var(--accent-border);
+            font-weight: 500;
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px rgba(9, 105, 218, 0.3);
+        }
+
+        .nav-item .nav-icon {
+            display: inline-block;
+            width: 22px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 15px;
+            opacity: 0.7;
+        }
+
+        .nav-item.active .nav-icon {
+            opacity: 1;
+        }
+
+        .nav-divider {
+            height: 1px;
+            background: var(--border-sidebar);
+            margin: 8px 20px;
+            transition: background 0.3s ease;
+        }
+
+        /* 下拉菜单 */
+        .nav-dropdown summary::-webkit-details-marker {
+            display: none;
+        }
+        .nav-dropdown summary {
+            list-style: none;
+            outline: none;
+            display: flex;
+            align-items: center;
+        }
+        .nav-dropdown summary .arrow-icon {
+            margin-left: auto;
+            transition: transform 0.2s ease;
+            opacity: 0.6;
+            color: var(--dropdown-arrow);
+        }
+        .nav-dropdown[open] summary .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .nav-dropdown .sub-item {
+            padding-left: 48px !important;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border-left-color: transparent;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+        .nav-dropdown .sub-item:hover {
+            background: var(--bg-hover);
+            color: var(--text-sidebar-hover);
+        }
+        .nav-dropdown .sub-item.active {
+            color: var(--text-sidebar-active);
+            background: var(--bg-active);
+            border-left-color: var(--accent-border);
+        }
+
+        .sidebar-footer {
+            padding: 14px 20px;
+            border-top: 1px solid var(--border-sidebar);
+            font-size: 12px;
+            color: var(--sidebar-footer-color);
+            flex-shrink: 0;
+            text-align: center;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+            background: var(--bg-sidebar-header);
+        }
+
+        /* ============================================================
+           右侧内容区
+           ============================================================ */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-content);
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .content-header {
+            padding: 20px 40px 16px;
+            border-bottom: 1px solid var(--border-light);
+            flex-shrink: 0;
+            background: var(--bg-content-header);
+            transition: background 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-header .breadcrumb {
+            font-size: 13px;
+            color: var(--breadcrumb-color);
+            transition: color 0.3s ease;
+        }
+
+        .content-header .breadcrumb span {
+            color: var(--breadcrumb-accent);
+            transition: color 0.3s ease;
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+            background: var(--bg-content);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 36px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-hover);
+            border-color: var(--text-secondary);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .theme-toggle .icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        /* 根据 data-theme 显示不同图标（使用伪元素或直接JS改文字，这里用JS改文本内容） */
+        /* 我们通过JS切换按钮文字，所以无需额外CSS */
+
+        .content-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px 48px 20px;
+            background: var(--bg-content);
+            transition: background 0.3s ease;
+        }
+
+        .content-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        .content-body::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        .content-body::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+        }
+        .content-body::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
+        /* ============================================================
+           内容样式
+           ============================================================ */
+        .wiki-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .wiki-content h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-light);
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .wiki-content h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .wiki-content h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .wiki-content p {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .wiki-content ul,
+        .wiki-content ol {
+            margin: 12px 0 20px 24px;
+            line-height: 1.8;
+            font-size: 15px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .wiki-content li {
+            margin-bottom: 6px;
+        }
+
+        .wiki-content code {
+            background: var(--code-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            color: var(--code-color);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .wiki-content pre {
+            background: var(--code-bg);
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            overflow-x: auto;
+            margin: 16px 0 20px;
+            font-size: 13px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            line-height: 1.7;
+            color: var(--text-primary);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .wiki-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 20px;
+            font-size: 14px;
+        }
+
+        .wiki-content table th {
+            background: var(--table-header-bg);
+            text-align: left;
+            padding: 10px 14px;
+            border: 1px solid var(--table-border);
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .wiki-content table td {
+            padding: 10px 14px;
+            border: 1px solid var(--table-border);
+            color: var(--text-primary);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .wiki-content table tr:nth-child(even) {
+            background: var(--table-stripe);
+            transition: background 0.3s ease;
+        }
+
+        .wiki-content a:not(.nav-item):not(.nav-link) {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .wiki-content a:not(.nav-item):not(.nav-link):hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .wiki-content .link-placeholder {
+            color: var(--link-placeholder-color);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--link-placeholder-color);
+            padding-bottom: 1px;
+            cursor: default;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .wiki-content .link-placeholder:hover {
+            background: var(--link-placeholder-hover-bg);
+        }
+
+        .wiki-content blockquote {
+            margin: 16px 0 20px;
+            padding: 12px 20px;
+            border-left: 4px solid var(--blockquote-border);
+            background: var(--blockquote-bg);
+            border-radius: 0 6px 6px 0;
+            color: var(--text-primary);
+            font-style: italic;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .wiki-content .note-box {
+            background: var(--note-bg);
+            border: 1px solid var(--note-border);
+            border-radius: 8px;
+            padding: 14px 20px;
+            margin: 16px 0 20px;
+            color: var(--note-color);
+            font-size: 14px;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .wiki-content .note-box strong {
+            color: var(--accent);
+            transition: color 0.3s ease;
+        }
+
+        .wiki-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 12px 0;
+        }
+
+        /* ============================================================
+           底部导航
+           ============================================================ */
+        .content-footer {
+            padding: 16px 48px 28px;
+            border-top: 1px solid var(--border-light);
+            flex-shrink: 0;
+            background: var(--bg-content-footer);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 24px;
+            border: 1px solid var(--nav-link-border);
+            border-radius: 6px;
+            background: var(--nav-link-bg);
+            color: var(--nav-link-color);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .nav-link:hover:not(.disabled) {
+            background: var(--nav-link-hover-bg);
+            border-color: var(--nav-link-hover-border);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            text-decoration: none;
+            color: var(--nav-link-color);
+        }
+
+        .nav-link:active:not(.disabled) {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        .nav-link.disabled {
+            opacity: var(--nav-link-disabled-opacity);
+            cursor: not-allowed;
+            pointer-events: none;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .nav-link .arrow {
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .nav-link.prev .arrow {
+            margin-right: 4px;
+        }
+        .nav-link.next .arrow {
+            margin-left: 4px;
+        }
+
+        .page-indicator {
+            font-size: 13px;
+            color: var(--text-secondary);
+            letter-spacing: 0.3px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .page-indicator strong {
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        /* ============================================================
+           响应式
+           ============================================================ */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 220px;
+                min-width: 220px;
+            }
+
+            .content-body {
+                padding: 20px 24px 16px;
+            }
+
+            .content-footer {
+                padding: 14px 24px 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .content-header {
+                padding: 14px 24px 12px;
+            }
+
+            .wiki-content h1 {
+                font-size: 22px;
+            }
+
+            .nav-link {
+                padding: 7px 16px;
+                font-size: 13px;
+            }
+
+            .theme-toggle {
+                font-size: 18px;
+                padding: 4px 10px;
+                min-width: 34px;
+                min-height: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .wiki-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: unset;
+                max-height: 200px;
+                flex-shrink: 0;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+                border-right: none;
+                border-bottom: 1px solid var(--border-sidebar);
+            }
+
+            .sidebar-nav {
+                padding: 4px 0 8px;
+            }
+
+            .nav-item {
+                padding: 7px 16px 7px 20px;
+                font-size: 13px;
+            }
+
+            .nav-dropdown .sub-item {
+                padding-left: 36px !important;
+            }
+
+            .content-area {
+                flex: 1;
+                min-height: 0;
+            }
+
+            .content-body {
+                padding: 16px 18px 12px;
+            }
+
+            .content-footer {
+                padding: 12px 18px 18px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .wiki-content h1 {
+                font-size: 20px;
+            }
+
+            .sidebar-header {
+                padding: 14px 16px 10px;
+            }
+            .sidebar-header h2 {
+                font-size: 16px;
+            }
+
+            .theme-toggle {
+                font-size: 16px;
+                padding: 2px 8px;
+                min-width: 30px;
+                min-height: 26px;
+            }
+        }
+
+        /* ============================================================
+           页面切换淡入动画
+           ============================================================ */
+        .wiki-content {
+            animation: fadeSlide 0.25s ease forwards;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================================
+           滚动条整体美化
+           ============================================================ */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wiki-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>
+                     目录
+                    <span>v2.0</span>
+                </h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <span class="nav-icon">🏠</span>首页
+                </a>
+                <a href="./Getting_To_Start/index.html" class="nav-item">
+                    <span class="nav-icon">🚀</span>快速开始
+                </a>
+                <a href="./Code_of_Conduct/index.html" class="nav-item">
+                    <span class="nav-icon">📜</span>规则
+                </a>
+                <details class="nav-dropdown">
+                    <summary class="nav-item" style="cursor: pointer;">
+                        <span class="nav-icon">🎮</span>关于玩法
+                        <span class="arrow-icon">▼</span>
+                    </summary>
+                      <a href="example3.html" class="nav-item sub-item">原版生存</a>
+                      <a href="example3.html" class="nav-item sub-item">单方块生存</a>
+                      <a href="example3.html" class="nav-item sub-item">Blood β</a>
+                      <a href="example3.html" class="nav-item sub-item">小游戏(旧)</a>
+                      <a href="example3.html" class="nav-item sub-item">起床战争</a>
+                      <a href="example3.html" class="nav-item sub-item">空岛战争</a>
+                      <a href="example3.html" class="nav-item sub-item">战桥</a>
+                      <a href="example3.html" class="nav-item sub-item">羊の战争</a>
+                      <a href="example3.html" class="nav-item sub-item">CS Beta</a>
+                      <a href="example3.html" class="nav-item sub-item">古振兴的阴谋</a>
+                </details>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <div class="content-header">
+                <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                    <span class="icon" id="themeIcon">☀️</span>
+                </button>
+            </div>
+
+            <div class="content-body">
+                <div class="wiki-content">
+                    <h1>欢迎!</h1>
+                    <p>
+                        这是 <strong>Pinkoc 土豆群组</strong> 的 Wiki 文档。<br />
+                        如果你想看其他文档，而不是 <strong>Pinkoc 土豆群组</strong> 的文档。<br />
+                        你应该前往 <strong><a href="https://www.pinkoc.top/Project/index.html">项目</a></strong>
+                    </p>
+                    <h3>随便看看?</h3>
+                    <p>To do</p>
+                    <img src="/Photos/%E6%BB%91%E7%A8%BD.png" alt="喵" style="max-width:300px;" />
+                </div>
+            </div>
+
+            <div class="content-footer">
+                <a href="#" class="nav-link prev disabled">
+                    <span class="arrow">‹</span> 上一页
+                </a>
+                <a href="./Getting_To_Start/index.html" class="nav-link next">
+                    下一页 <span class="arrow">›</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        (function() {
+            const html = document.documentElement;
+            const toggleBtn = document.getElementById('themeToggle');
+            const iconSpan = document.getElementById('themeIcon');
+
+            function getCurrentTheme() {
+                return html.getAttribute('data-theme') || 'light';
+            }
+
+            function setTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    iconSpan.textContent = '🌙';
+                } else {
+                    iconSpan.textContent = '☀️';
+                }
+                try {
+                    localStorage.setItem('wiki-theme', theme);
+                } catch (e) { /* ignore */ }
+            }
+
+            function toggleTheme() {
+                const current = getCurrentTheme();
+                const next = (current === 'light') ? 'dark' : 'light';
+                setTheme(next);
+            }
+
+            function initTheme() {
+                let saved;
+                try {
+                    saved = localStorage.getItem('wiki-theme');
+                } catch (e) { /* ignore */ }
+                if (saved === 'light' || saved === 'dark') {
+                    setTheme(saved);
+                    return;
+                }
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(prefersDark ? 'dark' : 'light');
+            }
+            toggleBtn.addEventListener('click', toggleTheme);
+
+            initTheme();
+        })();
+    </script>
+
+</body>
+</html>
