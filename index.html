@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<!--你到底在看什么。。。-->
-<!--UTC+8 2026.09.01 21:23-->
-<!--我去我不要开学-->
-<!--〒▽〒-->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="Pinkoc.png" type="image/x-icon" />
     <title>Pinkoc</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
             --bg-body: #ffffff;
@@ -85,12 +81,12 @@
             --shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.4);
             --shadow-modal: 0 40px 80px rgba(0, 0, 0, 0.6);
 
-            --glow-color: rgba(255, 180, 80, 0.45);
-            --glow-color-outer: rgba(255, 190, 130, 0.12);
+            --glow-color: rgba(255, 210, 160, 0.30);
+            --glow-color-outer: rgba(255, 220, 180, 0.08);
 
             --filter-img: brightness(0.92) contrast(1.05);
-            --filter-potato: drop-shadow(0 0 30px rgba(255, 180, 80, 0.20)) drop-shadow(0 0 60px rgba(255, 160, 60, 0.12));
-            --filter-potato-hover: drop-shadow(0 0 40px rgba(255, 180, 80, 0.35)) drop-shadow(0 0 60px rgba(255, 160, 60, 0.22));
+            --filter-potato: drop-shadow(0 0 30px rgba(255, 180, 80, 0.15)) drop-shadow(0 0 60px rgba(255, 160, 60, 0.08));
+            --filter-potato-hover: drop-shadow(0 0 40px rgba(255, 180, 80, 0.25)) drop-shadow(0 0 60px rgba(255, 160, 60, 0.15));
         }
 
         * {
@@ -231,11 +227,6 @@
             transform: scale(0.96);
         }
 
-        .lang-switch {
-            position: relative;
-            display: inline-block;
-        }
-
         .lang-btn {
             display: flex;
             align-items: center;
@@ -263,78 +254,6 @@
             color: var(--text-highlight);
         }
 
-        .lang-dropdown {
-            display: none;
-            position: absolute;
-            top: calc(100% + 8px);
-            right: 0;
-            background: var(--bg-modal);
-            border-radius: 20px;
-            box-shadow: var(--shadow-modal);
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            min-width: 160px;
-            z-index: 100;
-            overflow: hidden;
-            transition: background var(--transition-theme), border-color var(--transition-theme);
-        }
-
-        .lang-dropdown.open {
-            display: block;
-            animation: dropdownIn 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        @keyframes dropdownIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-8px) scale(0.96);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .lang-dropdown a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            border-radius: 14px;
-            background: transparent;
-            border: none;
-            width: 100%;
-            text-align: left;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
-            text-decoration: none;
-        }
-
-        .lang-dropdown a:hover {
-            background: var(--bg-btn);
-        }
-
-        .lang-dropdown a i {
-            font-size: 18px;
-            width: 1.4em;
-            text-align: center;
-        }
-
-        .lang-dropdown a .check {
-            margin-left: auto;
-            color: var(--text-highlight);
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .lang-dropdown a.active .check {
-            opacity: 1;
-        }
         .theme-toggle {
             display: flex;
             align-items: center;
@@ -548,7 +467,6 @@
             filter: var(--filter-potato-hover);
         }
 
-        /* ===== 标题 ===== */
         .title-section {
             text-align: center;
             margin-bottom: 32px;
@@ -892,7 +810,7 @@
             background: var(--bg-modal);
             border-radius: 40px;
             padding: 44px 48px 40px;
-            max-width: 460px;
+            max-width: 420px;
             width: 90%;
             box-shadow: var(--shadow-modal);
             text-align: center;
@@ -920,12 +838,12 @@
         }
 
         .modal-box .modal-icon {
-            font-size: 52px;
-            margin-bottom: 6px;
+            font-size: 48px;
+            margin-bottom: 4px;
         }
 
         .modal-box h3 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--text-primary);
             margin-bottom: 6px;
@@ -934,8 +852,8 @@
 
         .modal-box .modal-desc {
             color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 28px;
+            font-size: 15px;
+            margin-bottom: 24px;
             line-height: 1.5;
             transition: color var(--transition-theme);
         }
@@ -943,13 +861,13 @@
         .modal-options {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .modal-options .modal-btn {
-            padding: 16px 20px;
+            padding: 14px 20px;
             border-radius: 60px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             border: 2px solid var(--border-modal);
             background: var(--bg-modal);
@@ -961,6 +879,7 @@
             justify-content: center;
             gap: 12px;
             font-family: inherit;
+            text-decoration: none;
         }
 
         .modal-options .modal-btn:hover {
@@ -974,38 +893,48 @@
             transform: scale(0.97);
         }
 
-        .modal-options .modal-btn.qq {
+        .modal-options .modal-btn i {
+            font-size: 20px;
+        }
+
+        .modal-options .modal-btn.zh {
+            border-color: #d0312d;
+            color: #d0312d;
+        }
+        .modal-options .modal-btn.zh:hover {
+            background: #fff0ee;
+            border-color: #b82824;
+            color: #b82824;
+        }
+        [data-theme="dark"] .modal-options .modal-btn.zh:hover {
+            background: #2a1a18;
+            border-color: #e85a4a;
+            color: #e85a4a;
+        }
+
+        .modal-options .modal-btn.en {
             border-color: #2b82d9;
             color: #2b82d9;
         }
-        .modal-options .modal-btn.qq:hover {
+        .modal-options .modal-btn.en:hover {
             background: #eef5ff;
             border-color: #1a6ec4;
             color: #1a6ec4;
         }
-        [data-theme="dark"] .modal-options .modal-btn.qq:hover {
+        [data-theme="dark"] .modal-options .modal-btn.en:hover {
             background: #1a2a3a;
             border-color: #3a8ae0;
             color: #5a9ae8;
         }
 
-        .modal-options .modal-btn.discord {
-            border-color: #5865f2;
-            color: #5865f2;
-        }
-        .modal-options .modal-btn.discord:hover {
-            background: #eef0ff;
-            border-color: #4752c4;
-            color: #4752c4;
-        }
-        [data-theme="dark"] .modal-options .modal-btn.discord:hover {
-            background: #1a1e3a;
-            border-color: #6a77f2;
-            color: #7a87f5;
-        }
-
-        .modal-options .modal-btn i {
-            font-size: 22px;
+        .modal-options .modal-btn a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
         }
 
         @media (max-width: 900px) {
@@ -1237,23 +1166,10 @@
         </div>
 
         <div class="nav-center">
-            <div class="lang-switch">
-                <button class="lang-btn" id="langToggle" aria-label="切换语言">
-                    <i class="fas fa-globe"></i>
-                    <span id="currentLangLabel">中文</span>
-                    <i class="fas fa-chevron-down" style="font-size:12px;margin-left:2px;"></i>
-                </button>
-                <div class="lang-dropdown" id="langDropdown">
-                    <a href="index.html" data-lang="zh" class="active">
-                        <i class="fas fa-language"></i> 简体中文
-                        <span class="check"><i class="fas fa-check"></i></span>
-                    </a>
-                    <a href="en.html" data-lang="en">
-                        <i class="fas fa-language"></i> English
-                        <span class="check"><i class="fas fa-check"></i></span>
-                    </a>
-                </div>
-            </div>
+            <button class="lang-btn" id="langToggle" aria-label="切换语言">
+                <i class="fas fa-globe"></i>
+                <span id="currentLangLabel">中文</span>
+            </button>
 
             <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式">
                 <i class="fas fa-moon" id="themeIcon"></i>
@@ -1351,16 +1267,14 @@
             </div>
         </div>
 
-        <!-- 加入 -->
         <div class="join-section">
             <button class="btn btn-primary" id="joinUsBtn">
                 🤔 加入我们
             </button>
         </div>
 
-        <!-- ===== 底部图标按钮 ===== -->
         <div class="footer-icons">
-            <a href="https://github.com" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/0TMenf" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://bilibili.com" target="_blank" aria-label="Bilibili"><i class="fab fa-bilibili"></i></a>
             <a href="https://qm.qq.com/q/lRuaApp57O" target="_blank" aria-label="QQ"><i class="fab fa-qq"></i></a>
             <a href="https://discord.gg/aGJXhF2j" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
@@ -1368,15 +1282,12 @@
             <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
 
-        <!-- ===== 底部声明 ===== -->
         <div class="footer-declaration">
-            © 2026 Pinkoc. All rights reserved. &nbsp;|&nbsp; 粤ICP备XXXXXXXX号 &nbsp;|&nbsp; 
-            本网站内容仅供娱乐，所有数据均为虚构。
+            © Pinkoc | 2022-2026
         </div>
 
     </div>
 
-    <!-- ===== 模态框 ===== -->
     <div class="modal-overlay" id="joinModal">
         <div class="modal-box">
             <button class="close-btn" id="modalCloseBtn">&times;</button>
@@ -1390,6 +1301,20 @@
                 <button class="modal-btn discord" id="discordBtn">
                     <i class="fab fa-discord"></i> Discord
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="langModal">
+        <div class="modal-box">
+            <button class="close-btn" id="langModalCloseBtn">&times;</button>
+            <div class="modal-icon">🌐</div>
+            <h3>选择语言</h3>
+            <div class="modal-options">
+                <a href="index.html" class="modal-btn zh"></i> 🇨🇳简体中文
+                </a>
+                <a href="en.html" class="modal-btn en"></i> 🇺🇸English
+                </a>
             </div>
         </div>
     </div>
@@ -1421,17 +1346,30 @@
             themeToggle.addEventListener('click', toggleTheme);
 
             const langToggle = document.getElementById('langToggle');
-            const langDropdown = document.getElementById('langDropdown');
+            const langModal = document.getElementById('langModal');
+            const langModalCloseBtn = document.getElementById('langModalCloseBtn');
+
+            function openLangModal() {
+                langModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLangModal() {
+                langModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
 
             langToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
-                langDropdown.classList.toggle('open');
+                openLangModal();
             });
 
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.lang-switch')) {
-                    langDropdown.classList.remove('open');
-                }
+            langModalCloseBtn.addEventListener('click', closeLangModal);
+            langModal.addEventListener('click', function(e) {
+                if (e.target === langModal) closeLangModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && langModal.classList.contains('active')) closeLangModal();
             });
 
             const flipEl = document.getElementById('flipText');
@@ -1524,7 +1462,6 @@
                 container.classList.add('show');
             });
 
-            console.log('🥔 Pinkoc 已加载！ ヾ(≧▽≦*)o');
         })();
     </script>
 
