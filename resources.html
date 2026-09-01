@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="Pinkoc.png" type="image/x-icon">
+    <title>Pinkoc - 资源</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 24px;
+            background: #f5f6f8;
+            color: #202124;
+            font-family: "Segoe UI", "PingFang SC", Arial, sans-serif;
+        }
+
+        .browser {
+            width: min(1100px, 100%);
+            min-height: calc(100vh - 48px);
+            margin: auto;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .08);
+        }
+
+        .browser-head {
+            padding: 16px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d93025;
+            box-shadow: 20px 0 #f9ab00, 40px 0 #1e8e3e;
+            margin-right: 38px;
+        }
+
+        .address {
+            flex: 1;
+            padding: 10px 16px;
+            overflow: hidden;
+            color: #5f6368;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 24px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .directory-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .directory-title span {
+            color: #5f6368;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 24px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .back-btn,
+        .search {
+            padding: 10px 14px;
+            border: 1px solid #dadce0;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .back-btn {
+            color: #5f6368;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            background: #f1f3f4;
+        }
+
+        .search {
+            width: min(300px, 100%);
+            margin-left: auto;
+            outline: none;
+        }
+
+        .file-list {
+            padding: 12px 24px 32px;
+        }
+
+        .file-row {
+            display: grid;
+            grid-template-columns: 48px 1fr 150px 90px;
+            align-items: center;
+            gap: 12px;
+            min-height: 64px;
+            padding: 8px 12px;
+            border-bottom: 1px solid #f1f3f4;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 10px;
+        }
+
+        .file-row:hover {
+            background: #f8f9fa;
+        }
+
+        .file-icon {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .file-name {
+            color: #1a73e8;
+            font-weight: 600;
+        }
+
+        .file-info,
+        .file-type {
+            color: #70757a;
+            font-size: 13px;
+        }
+
+        .download {
+            color: #1a73e8;
+            font-size: 13px;
+            text-align: right;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 10px;
+            }
+
+            .browser {
+                min-height: calc(100vh - 20px);
+            }
+
+            .file-row {
+                grid-template-columns: 42px 1fr 70px;
+            }
+
+            .file-info {
+                display: none;
+            }
+
+            .file-type {
+                text-align: right;
+            }
+
+            .toolbar {
+                flex-wrap: wrap;
+            }
+
+            .search {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="browser">
+        <header class="browser-head">
+            <div class="topbar">
+                <div class="traffic-light"></div>
+                <div class="address">files://Pinkoc/</div>
+            </div>
+
+            <div class="directory-title">
+                📂 根目录
+                <span>目前正在浏览：根目录</span>
+            </div>
+        </header>
+
+        <div class="toolbar">
+            <button class="back-btn" onclick="history.back()">
+                <i class="fas fa-arrow-left"></i> 返回上级
+            </button>
+
+            <input
+                class="search"
+                id="searchInput"
+                type="search"
+                placeholder="搜索文件..."
+            />
+        </div>
+
+        <section class="file-list" id="fileList">
+            <a class="file-row" href="downloads/" data-name="downloads 资源文件夹">
+                <div class="file-icon">📂</div>
+                <div class="file-name">downloads</div>
+                <div class="file-info">资源文件夹</div>
+                <div class="file-type">文件夹</div>
+            </a>
+
+            <a class="file-row" href="downloads/example.txt" download data-name="example.txt 示例文件">
+                <div class="file-icon">📄</div>
+                <div class="file-name">example.txt</div>
+                <div class="file-info">示例文本文件</div>
+                <div class="file-type">TXT</div>
+                <div class="download">下载</div>
+            </a>
+
+            <a class="file-row" href="downloads/Pinkoc-resource.zip" download data-name="Pinkoc-resource.zip">
+                <div class="file-icon">📄</div>
+                <div class="file-name">Pinkoc-resource.zip</div>
+                <div class="file-info">Pinkoc 资源包</div>
+                <div class="file-type">ZIP</div>
+                <div class="download">下载</div>
+            </a>
+
+            <a class="file-row" href="downloads/Pinkoc-Wiki.pdf" download data-name="Pinkoc-Wiki.pdf">
+                <div class="file-icon">📄</div>
+                <div class="file-name">Pinkoc-Wiki.pdf</div>
+                <div class="file-info">服务器 Wiki 文档</div>
+                <div class="file-type">PDF</div>
+                <div class="download">下载</div>
+            </a>
+
+            <a class="file-row" href="downloads/server-icon.png" download data-name="server-icon.png">
+                <div class="file-icon">📄</div>
+                <div class="file-name">server-icon.png</div>
+                <div class="file-info">服务器图标</div>
+                <div class="file-type">PNG</div>
+                <div class="download">下载</div>
+            </a>
+        </section>
+    </main>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const rows = document.querySelectorAll(".file-row");
+
+        searchInput.addEventListener("input", () => {
+            const keyword = searchInput.value.trim().toLowerCase();
+
+            rows.forEach(row => {
+                row.style.display = row.dataset.name.toLowerCase().includes(keyword)
+                    ? "grid"
+                    : "none";
+            });
+        });
+    </script>
+</body>
+</html>
