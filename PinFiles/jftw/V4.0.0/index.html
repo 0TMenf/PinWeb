@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="Pinkoc.png" type="image/x-icon" />
+    <title>Pinkoc · 资源</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --bg-body: #ffffff;
+            --bg-container: #ffffff;
+            --bg-nav: #ffffff;
+            --bg-card: #fafafa;
+            --bg-card-text: #ffffff;
+            --bg-btn: #f5f5f5;
+            --bg-btn-primary: #1a1a1a;
+            --bg-btn-secondary: transparent;
+            --bg-modal: #ffffff;
+            --bg-input: #f5f5f5;
+            --bg-item: #f8f8f8;
+            --bg-item-hover: #f0f0f0;
+
+            --text-primary: #1a1a1a;
+            --text-secondary: #555;
+            --text-muted: #777;
+            --text-btn-primary: #ffffff;
+            --text-btn-secondary: #1a1a1a;
+            --text-nav: #4a4a4a;
+            --text-nav-hover: #1a1a1a;
+            --text-highlight: #d0312d;
+            --text-flip: #d0312d;
+
+            --border-color: rgba(0, 0, 0, 0.04);
+            --border-btn: #d0d0d0;
+            --border-modal: #e0e0e0;
+            --border-item: #e8e8e8;
+
+            --shadow-nav: 0 4px 20px rgba(0, 0, 0, 0.04);
+            --shadow-container: 0 20px 60px rgba(0, 0, 0, 0.04);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.04);
+            --shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-modal: 0 40px 80px rgba(0, 0, 0, 0.20);
+
+            --glow-color: rgba(255, 200, 120, 0.55);
+            --glow-color-outer: rgba(255, 210, 150, 0.20);
+
+            --filter-img: none;
+            --filter-potato: drop-shadow(0 0 30px rgba(255, 200, 120, 0.25)) drop-shadow(0 0 60px rgba(255, 180, 100, 0.15));
+
+            --transition-theme: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #121212;
+            --bg-container: #1a1a1a;
+            --bg-nav: #1a1a1a;
+            --bg-card: #242424;
+            --bg-card-text: #242424;
+            --bg-btn: #333;
+            --bg-btn-primary: #e8e8e8;
+            --bg-btn-secondary: transparent;
+            --bg-modal: #242424;
+            --bg-input: #333;
+            --bg-item: #2a2a2a;
+            --bg-item-hover: #333;
+
+            --text-primary: #f0f0f0;
+            --text-secondary: #aaa;
+            --text-muted: #888;
+            --text-btn-primary: #1a1a1a;
+            --text-btn-secondary: #f0f0f0;
+            --text-nav: #b0b0b0;
+            --text-nav-hover: #ffffff;
+            --text-highlight: #f57c5a;
+            --text-flip: #f57c5a;
+
+            --border-color: rgba(255, 255, 255, 0.06);
+            --border-btn: #444;
+            --border-modal: #444;
+            --border-item: #3a3a3a;
+
+            --shadow-nav: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-container: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+            --shadow-btn: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-modal: 0 40px 80px rgba(0, 0, 0, 0.6);
+
+            --glow-color: rgba(255, 210, 160, 0.30);
+            --glow-color-outer: rgba(255, 220, 180, 0.08);
+
+            --filter-img: brightness(0.92) contrast(1.05);
+            --filter-potato: drop-shadow(0 0 30px rgba(255, 180, 80, 0.15)) drop-shadow(0 0 60px rgba(255, 160, 60, 0.08));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--bg-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px 40px;
+            margin: 0;
+            transition: background var(--transition-theme), color var(--transition-theme);
+            color: var(--text-primary);
+        }
+
+        /* ===== 导航栏 ===== */
+        .navbar {
+            width: 100%;
+            max-width: 1100px;
+            padding: 12px 24px;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-nav);
+            border-radius: 60px;
+            box-shadow: var(--shadow-nav);
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeDown 0.9s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation-delay: 0.05s;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            transition: background var(--transition-theme), box-shadow var(--transition-theme), border-color var(--transition-theme);
+        }
+
+        @keyframes fadeDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: color var(--transition-theme);
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .nav-logo span {
+            background: var(--bg-btn);
+            padding: 4px 14px 4px 12px;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: background var(--transition-theme), color var(--transition-theme);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-nav);
+            font-size: 15px;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+            background: transparent;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-links a i {
+            font-size: 18px;
+            width: 1.2em;
+            text-align: center;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-nav-hover);
+            background: var(--bg-btn);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-links a.active {
+            color: var(--text-nav-hover);
+            background: var(--bg-btn);
+        }
+
+        .nav-links a:active {
+            transform: scale(0.96);
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-btn);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px 6px 12px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .lang-btn i {
+            font-size: 16px;
+            color: var(--text-highlight);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-btn);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px) rotate(12deg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .theme-toggle:active {
+            transform: scale(0.92);
+        }
+
+        /* ===== 主容器 ===== */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--bg-container);
+            border-radius: 48px;
+            padding: 30px 30px 60px;
+            box-shadow: var(--shadow-container);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+                background var(--transition-theme),
+                box-shadow var(--transition-theme);
+        }
+
+        .container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== 页面头部 ===== */
+        .page-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-header h1 i {
+            color: var(--text-highlight);
+        }
+
+        .page-header .path {
+            font-size: 14px;
+            color: var(--text-muted);
+            background: var(--bg-btn);
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .page-header .path i {
+            margin-right: 4px;
+        }
+
+        /* ===== 文件列表 ===== */
+        .file-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 30px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            border-radius: 16px;
+            background: var(--bg-item);
+            border: 1px solid var(--border-item);
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            gap: 16px;
+        }
+
+        .file-item:hover {
+            background: var(--bg-item-hover);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-color: var(--text-highlight);
+        }
+
+        .file-item .icon {
+            font-size: 28px;
+            width: 40px;
+            text-align: center;
+            color: var(--text-highlight);
+            flex-shrink: 0;
+        }
+
+        .file-item .icon.folder {
+            color: #f5b342;
+        }
+        .file-item .icon.file {
+            color: var(--text-secondary);
+        }
+
+        .file-item .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .file-item .info .name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            word-break: break-all;
+        }
+
+        .file-item .info .meta {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .file-item .info .meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .file-item .action {
+            font-size: 14px;
+            color: var(--text-highlight);
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
+        }
+
+        .file-item:hover .action {
+            opacity: 1;
+        }
+
+        /* ===== 底部 ===== */
+        .footer-icons {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 20px 0 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 24px;
+            transition: border-color var(--transition-theme);
+        }
+
+        .footer-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-btn);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.25s ease;
+        }
+
+        .footer-icons a:hover {
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+            color: var(--text-highlight);
+            border-color: var(--text-highlight);
+        }
+
+        .footer-declaration {
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 8px 0 4px;
+            line-height: 1.6;
+            transition: color var(--transition-theme);
+        }
+
+        /* ===== 模态框（语言切换 & 加入） ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.94);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-box {
+            background: var(--bg-modal);
+            border-radius: 40px;
+            padding: 44px 48px 40px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: var(--shadow-modal);
+            text-align: center;
+            position: relative;
+            transition: background var(--transition-theme), box-shadow var(--transition-theme);
+        }
+
+        .modal-box .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+            padding: 4px 8px;
+            font-family: inherit;
+        }
+
+        .modal-box .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-box .modal-icon {
+            font-size: 48px;
+            margin-bottom: 4px;
+        }
+
+        .modal-box h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            transition: color var(--transition-theme);
+        }
+
+        .modal-box .modal-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            transition: color var(--transition-theme);
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-options .modal-btn {
+            padding: 14px 20px;
+            border-radius: 60px;
+            font-size: 17px;
+            font-weight: 600;
+            border: 2px solid var(--border-modal);
+            background: var(--bg-modal);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: inherit;
+            text-decoration: none;
+        }
+
+        .modal-options .modal-btn:hover {
+            border-color: var(--text-primary);
+            background: var(--bg-btn);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .modal-options .modal-btn:active {
+            transform: scale(0.97);
+        }
+
+        .modal-options .modal-btn i {
+            font-size: 20px;
+        }
+
+        .modal-options .modal-btn.zh {
+            border-color: #d0312d;
+            color: #d0312d;
+        }
+        .modal-options .modal-btn.zh:hover {
+            background: #fff0ee;
+            border-color: #b82824;
+            color: #b82824;
+        }
+        [data-theme="dark"] .modal-options .modal-btn.zh:hover {
+            background: #2a1a18;
+            border-color: #e85a4a;
+            color: #e85a4a;
+        }
+
+        .modal-options .modal-btn.en {
+            border-color: #2b82d9;
+            color: #2b82d9;
+        }
+        .modal-options .modal-btn.en:hover {
+            background: #eef5ff;
+            border-color: #1a6ec4;
+            color: #1a6ec4;
+        }
+        [data-theme="dark"] .modal-options .modal-btn.en:hover {
+            background: #1a2a3a;
+            border-color: #3a8ae0;
+            color: #5a9ae8;
+        }
+
+        .modal-options .modal-btn.qq {
+            border-color: #2b82d9;
+            color: #2b82d9;
+        }
+        .modal-options .modal-btn.qq:hover {
+            background: #eef5ff;
+            border-color: #1a6ec4;
+            color: #1a6ec4;
+        }
+        [data-theme="dark"] .modal-options .modal-btn.qq:hover {
+            background: #1a2a3a;
+            border-color: #3a8ae0;
+            color: #5a9ae8;
+        }
+
+        .modal-options .modal-btn.discord {
+            border-color: #5865f2;
+            color: #5865f2;
+        }
+        .modal-options .modal-btn.discord:hover {
+            background: #eef0ff;
+            border-color: #4752c4;
+            color: #4752c4;
+        }
+        [data-theme="dark"] .modal-options .modal-btn.discord:hover {
+            background: #1a1e3a;
+            border-color: #6a77f2;
+            color: #7a87f5;
+        }
+
+        .modal-options .modal-btn a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 16px 20px;
+                border-radius: 40px;
+                gap: 14px;
+            }
+            .nav-left {
+                justify-content: center;
+            }
+            .nav-center {
+                justify-content: center;
+            }
+            .nav-right {
+                justify-content: center;
+            }
+            .nav-logo {
+                font-size: 20px;
+            }
+            .nav-logo img {
+                height: 32px;
+            }
+            .nav-links {
+                gap: 4px;
+                justify-content: center;
+            }
+            .nav-links a {
+                font-size: 14px;
+                padding: 6px 12px;
+            }
+            .nav-links a i {
+                font-size: 16px;
+            }
+            .lang-btn {
+                font-size: 13px;
+                padding: 5px 12px 5px 10px;
+            }
+            .theme-toggle {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .modal-box {
+                padding: 32px 24px 30px;
+            }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .page-header h1 {
+                font-size: 24px;
+            }
+            .file-item {
+                padding: 12px 16px;
+                gap: 12px;
+            }
+            .file-item .icon {
+                font-size: 24px;
+                width: 32px;
+            }
+            .file-item .info .name {
+                font-size: 15px;
+            }
+            .file-item .info .meta {
+                font-size: 12px;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px 16px 40px;
+                border-radius: 28px;
+            }
+            .file-item {
+                padding: 10px 14px;
+            }
+            .file-item .icon {
+                font-size: 20px;
+                width: 28px;
+            }
+            .file-item .info .name {
+                font-size: 14px;
+            }
+            .file-item .info .meta {
+                font-size: 11px;
+                flex-direction: column;
+                gap: 2px;
+            }
+            .file-item .action {
+                font-size: 12px;
+            }
+            .footer-icons a {
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
+            }
+            .footer-declaration {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航栏 ===== -->
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="Pinkoc" />
+                <span>Pinkoc</span>
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <button class="lang-btn" id="langToggle" aria-label="切换语言">
+                <i class="fas fa-globe"></i>
+                <span id="currentLangLabel">中文</span>
+            </button>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> 首页</a>
+                <a href="resources.html" class="active"><i class="fas fa-folder"></i> 资源</a>
+                <a href="mc.html"><i class="fas fa-wifi"></i> MC</a>
+                <a href="projects.html"><i class="fas fa-code"></i> 项目</a>
+                <a href="about.html"><i class="fas fa-exclamation-circle"></i> 关于</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== 主容器 ===== -->
+    <div class="container" id="app">
+
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <h1><i class="fas fa-cloud-download-alt"></i> PinFiles</h1>
+            <div class="path"><i class="fas fa-folder-open"></i> / <a href="/resources.html">*</a> / <a href="/PinFiles/jftw/V4.0.0/index.html">机房偷玩</a> / APD-v4.0.0|机房偷玩整合包 17游戏[无需联网].zip</div>
+        </div>
+        <h2>因为文件大小大于 5GB，你需要前往网盘下载，我们深感歉意。</h2>
+        <div class="file-grid">
+            <a href="/PinFiles/jftw/V4.0.0/index.html" class="file-item" download>
+                    <div class="name">前往huang1111网盘</div>
+                    <div class="meta">
+                        <span><i class="fas fa-file-archive"></i> 7.1 GB</span>
+                        <span><i class="far fa-clock"></i> 2026-09-03</span>
+                    </div>
+                </div>
+                <div class="action"><i class="fas fa-download"></i></div>
+            </a>
+
+            <a href="/PinFiles/jftw/V4.0.0/index.html" class="file-item" download>
+                    <div class="name">前往123网盘</div>
+                    <div class="meta">
+                        <span><i class="fas fa-file-archive"></i> 7.1 GB</span>
+                        <span><i class="far fa-clock"></i> 2026-09-03</span>
+                    </div>
+                </div>
+                <div class="action"><i class="fas fa-download"></i></div>
+            </a>
+        </div>
+
+        <div class="footer-declaration">
+            © Pinkoc | 2022-2026 
+        </div>
+
+    </div>
+
+    <!-- ===== 语言切换模态框 ===== -->
+    <div class="modal-overlay" id="langModal">
+        <div class="modal-box">
+            <button class="close-btn" id="langModalCloseBtn">&times;</button>
+            <div class="modal-icon">🌐</div>
+            <h3>选择语言</h3>
+            <p class="modal-desc">Choose your language</p>
+            <div class="modal-options">
+                <a href="index.html" class="modal-btn zh">
+                    <i class="fas fa-language"></i> 简体中文
+                </a>
+                <a href="en.html" class="modal-btn en">
+                    <i class="fas fa-language"></i> English
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 加入模态框 ===== -->
+    <div class="modal-overlay" id="joinModal">
+        <div class="modal-box">
+            <button class="close-btn" id="modalCloseBtn">&times;</button>
+            <div class="modal-icon">🥔</div>
+            <h3>选一个吧（；´д｀）ゞ</h3>
+            <p class="modal-desc">加入我们喵 q(≧▽≦q)</p>
+            <div class="modal-options">
+                <button class="modal-btn qq" id="qqBtn">
+                    <i class="fab fa-qq"></i> QQ群
+                </button>
+                <button class="modal-btn discord" id="discordBtn">
+                    <i class="fab fa-discord"></i> Discord
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== 深色模式 =====
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const container = document.querySelector('.container');
+
+            function getStoredTheme() {
+                try { return localStorage.getItem('pinkoc_theme') || 'light'; } catch (_) { return 'light'; }
+            }
+
+            function setTheme(theme) {
+                const isDark = theme === 'dark';
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+                themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+                try { localStorage.setItem('pinkoc_theme', theme); } catch (_) {}
+            }
+
+            function toggleTheme() {
+                const current = document.documentElement.getAttribute('data-theme') || 'light';
+                setTheme(current === 'dark' ? 'light' : 'dark');
+            }
+
+            themeToggle.addEventListener('click', toggleTheme);
+
+            // ===== 语言切换弹窗 =====
+            const langToggle = document.getElementById('langToggle');
+            const langModal = document.getElementById('langModal');
+            const langModalCloseBtn = document.getElementById('langModalCloseBtn');
+
+            function openLangModal() {
+                langModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLangModal() {
+                langModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            langToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openLangModal();
+            });
+
+            langModalCloseBtn.addEventListener('click', closeLangModal);
+            langModal.addEventListener('click', function(e) {
+                if (e.target === langModal) closeLangModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && langModal.classList.contains('active')) closeLangModal();
+            });
+
+            // ===== 加入模态框 =====
+            const joinModal = document.getElementById('joinModal');
+            const joinCloseBtn = document.getElementById('modalCloseBtn');
+            const qqBtn = document.getElementById('qqBtn');
+            const discordBtn = document.getElementById('discordBtn');
+
+            // 从首页导航的“加入我们”按钮可能不存在，我们通过点击底部或导航的“资源”等不触发加入，但为了演示，我们在页面添加了一个隐藏触发？或者直接通过按钮？但本页没有“加入我们”按钮，我们保留模态框但不自动触发，用户可以通过其他页面进入。
+            // 我们额外添加一个快速加入的按钮？实际上我们可以在底部或导航添加，但为了保持简洁，我们在页面中加入一个“加入我们”按钮？原首页有，但本页没有，我们可以增加一个小的加入按钮，或者直接不添加，因为用户可能通过首页加入。
+            // 为了完整，我们在底部图标上方加一个“加入我们”的按钮，与首页一致。
+            // 但为了保持风格，我们在文件列表上方或下方添加一个“加入我们”按钮。
+            // 在文件列表之后，底部之前加入。
+            // 修改DOM：在文件列表后插入一个加入按钮。
+            const joinSection = document.createElement('div');
+            joinSection.style.cssText = 'width:100%; display:flex; justify-content:center; margin: 20px 0 10px;';
+            joinSection.innerHTML = `<button class="btn btn-primary" id="joinUsBtn">🤔 加入我们</button>`;
+            const fileGrid = document.querySelector('.file-grid');
+            fileGrid.parentNode.insertBefore(joinSection, fileGrid.nextSibling);
+
+            // 现在获取加入按钮
+            const joinUsBtn = document.getElementById('joinUsBtn');
+
+            function openJoinModal() {
+                joinModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeJoinModal() {
+                joinModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            joinCloseBtn.addEventListener('click', closeJoinModal);
+            joinModal.addEventListener('click', function(e) {
+                if (e.target === joinModal) closeJoinModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && joinModal.classList.contains('active')) closeJoinModal();
+            });
+
+            qqBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                window.open('https://qm.qq.com/q/lRuaApp57O', '_blank');
+                closeJoinModal();
+            });
+
+            discordBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                window.open('https://discord.gg/aGJXhF2j', '_blank');
+                closeJoinModal();
+            });
+
+            if (joinUsBtn) {
+                joinUsBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openJoinModal();
+                });
+            }
+
+            // ===== 初始化 =====
+            const savedTheme = getStoredTheme();
+            setTheme(savedTheme);
+
+            requestAnimationFrame(() => {
+                container.classList.add('show');
+            });
+
+            console.log('🥔 Pinkoc 资源页已加载！');
+        })();
+    </script>
+
+</body>
+</html>
