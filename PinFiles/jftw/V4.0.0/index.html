@@ -864,25 +864,6 @@
             </div>
         </div>
     </div>
-
-    <!-- ===== 加入模态框 ===== -->
-    <div class="modal-overlay" id="joinModal">
-        <div class="modal-box">
-            <button class="close-btn" id="modalCloseBtn">&times;</button>
-            <div class="modal-icon">🥔</div>
-            <h3>选一个吧（；´д｀）ゞ</h3>
-            <p class="modal-desc">加入我们喵 q(≧▽≦q)</p>
-            <div class="modal-options">
-                <button class="modal-btn qq" id="qqBtn">
-                    <i class="fab fa-qq"></i> QQ群
-                </button>
-                <button class="modal-btn discord" id="discordBtn">
-                    <i class="fab fa-discord"></i> Discord
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
         (function() {
             'use strict';
@@ -944,21 +925,6 @@
             const qqBtn = document.getElementById('qqBtn');
             const discordBtn = document.getElementById('discordBtn');
 
-            // 从首页导航的“加入我们”按钮可能不存在，我们通过点击底部或导航的“资源”等不触发加入，但为了演示，我们在页面添加了一个隐藏触发？或者直接通过按钮？但本页没有“加入我们”按钮，我们保留模态框但不自动触发，用户可以通过其他页面进入。
-            // 我们额外添加一个快速加入的按钮？实际上我们可以在底部或导航添加，但为了保持简洁，我们在页面中加入一个“加入我们”按钮？原首页有，但本页没有，我们可以增加一个小的加入按钮，或者直接不添加，因为用户可能通过首页加入。
-            // 为了完整，我们在底部图标上方加一个“加入我们”的按钮，与首页一致。
-            // 但为了保持风格，我们在文件列表上方或下方添加一个“加入我们”按钮。
-            // 在文件列表之后，底部之前加入。
-            // 修改DOM：在文件列表后插入一个加入按钮。
-            const joinSection = document.createElement('div');
-            joinSection.style.cssText = 'width:100%; display:flex; justify-content:center; margin: 20px 0 10px;';
-            joinSection.innerHTML = `<button class="btn btn-primary" id="joinUsBtn">🤔 加入我们</button>`;
-            const fileGrid = document.querySelector('.file-grid');
-            fileGrid.parentNode.insertBefore(joinSection, fileGrid.nextSibling);
-
-            // 现在获取加入按钮
-            const joinUsBtn = document.getElementById('joinUsBtn');
-
             function openJoinModal() {
                 joinModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -975,18 +941,6 @@
             });
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && joinModal.classList.contains('active')) closeJoinModal();
-            });
-
-            qqBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                window.open('https://qm.qq.com/q/lRuaApp57O', '_blank');
-                closeJoinModal();
-            });
-
-            discordBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                window.open('https://discord.gg/aGJXhF2j', '_blank');
-                closeJoinModal();
             });
 
             if (joinUsBtn) {
