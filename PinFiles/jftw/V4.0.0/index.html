@@ -343,10 +343,23 @@
             padding: 6px 16px;
             border-radius: 40px;
             border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
         }
 
         .page-header .path i {
             margin-right: 4px;
+        }
+
+        .page-header .path a {
+            color: var(--text-highlight);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .page-header .path a:hover {
+            text-decoration: underline;
         }
 
         /* ===== 文件列表 ===== */
@@ -480,7 +493,7 @@
             transition: color var(--transition-theme);
         }
 
-        /* ===== 模态框（语言切换 & 加入） ===== */
+        /* ===== 模态框（语言切换） ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -632,36 +645,6 @@
             color: #5a9ae8;
         }
 
-        .modal-options .modal-btn.qq {
-            border-color: #2b82d9;
-            color: #2b82d9;
-        }
-        .modal-options .modal-btn.qq:hover {
-            background: #eef5ff;
-            border-color: #1a6ec4;
-            color: #1a6ec4;
-        }
-        [data-theme="dark"] .modal-options .modal-btn.qq:hover {
-            background: #1a2a3a;
-            border-color: #3a8ae0;
-            color: #5a9ae8;
-        }
-
-        .modal-options .modal-btn.discord {
-            border-color: #5865f2;
-            color: #5865f2;
-        }
-        .modal-options .modal-btn.discord:hover {
-            background: #eef0ff;
-            border-color: #4752c4;
-            color: #4752c4;
-        }
-        [data-theme="dark"] .modal-options .modal-btn.discord:hover {
-            background: #1a1e3a;
-            border-color: #6a77f2;
-            color: #7a87f5;
-        }
-
         .modal-options .modal-btn a {
             color: inherit;
             text-decoration: none;
@@ -670,6 +653,20 @@
             gap: 10px;
             width: 100%;
             justify-content: center;
+        }
+
+        .notice-msg {
+            width: 100%;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-highlight);
+            background: var(--bg-item);
+            padding: 16px 24px;
+            border-radius: 16px;
+            border-left: 6px solid var(--text-highlight);
+            margin-bottom: 24px;
+            text-align: center;
+            transition: background var(--transition-theme), color var(--transition-theme);
         }
 
         /* ===== 响应式 ===== */
@@ -741,6 +738,10 @@
                 font-size: 12px;
                 gap: 10px;
             }
+            .notice-msg {
+                font-size: 16px;
+                padding: 14px 18px;
+            }
         }
 
         @media (max-width: 640px) {
@@ -773,6 +774,14 @@
             }
             .footer-declaration {
                 font-size: 12px;
+            }
+            .notice-msg {
+                font-size: 14px;
+                padding: 12px 14px;
+            }
+            .page-header .path {
+                font-size: 12px;
+                padding: 4px 12px;
             }
         }
     </style>
@@ -816,33 +825,53 @@
         <!-- 页面头部 -->
         <div class="page-header">
             <h1><i class="fas fa-cloud-download-alt"></i> PinFiles</h1>
-            <div class="path"><i class="fas fa-folder-open"></i> / <a href="/resources.html">*</a> / <a href="/PinFiles/jftw/V4.0.0/index.html">机房偷玩</a> / APD-v4.0.0|机房偷玩整合包 17游戏[无需联网].zip</div>
+            <div class="path">
+                <i class="fas fa-folder-open"></i>
+                / <a href="resources.html">资源</a>
+                / <a href="/PinFiles/jftw/V4.0.0/index.html">机房偷玩</a>
+                / APD-v4.0.0|机房偷玩整合包 17游戏[无需联网].zip
+            </div>
         </div>
-        <h2>因为文件大小大于 5GB，你需要前往网盘下载，我们深感歉意。</h2>
+
+        <!-- 提示信息 -->
+        <div class="notice-msg">
+            <i class="fas fa-exclamation-triangle"></i>
+            因为文件大小大于 5GB，你需要前往网盘下载，我们深感歉意。
+        </div>
+
+        <!-- 文件列表 -->
         <div class="file-grid">
-            <a href="/PinFiles/jftw/V4.0.0/index.html" class="file-item" download>
-                    <div class="name">前往huang1111网盘</div>
+
+            <!-- huang1111 网盘 -->
+            <a href="https://pan.huang1111.cn/s/Nka9Gu1" class="file-item" target="_blank" rel="noopener noreferrer">
+                <div class="icon file"><i class="fas fa-file-archive"></i></div>
+                <div class="info">
+                    <div class="name">前往 huang1111 网盘</div>
                     <div class="meta">
-                        <span><i class="fas fa-file-archive"></i> 7.1 GB</span>
+                        <span><i class="fas fa-hdd"></i> 7.1 GB</span>
                         <span><i class="far fa-clock"></i> 2026-09-03</span>
                     </div>
                 </div>
-                <div class="action"><i class="fas fa-download"></i></div>
+                <div class="action"><i class="fas fa-external-link-alt"></i></div>
             </a>
 
-            <a href="/PinFiles/jftw/V4.0.0/index.html" class="file-item" download>
-                    <div class="name">前往123网盘</div>
+            <!-- 123 网盘 -->
+            <a href="https://1841729114.share.123pan.cn/123pan/azurTd-ASw5" class="file-item" target="_blank" rel="noopener noreferrer">
+                <div class="icon file"><i class="fas fa-file-archive"></i></div>
+                <div class="info">
+                    <div class="name">前往 123 网盘</div>
                     <div class="meta">
-                        <span><i class="fas fa-file-archive"></i> 7.1 GB</span>
+                        <span><i class="fas fa-hdd"></i> 7.1 GB</span>
                         <span><i class="far fa-clock"></i> 2026-09-03</span>
                     </div>
                 </div>
-                <div class="action"><i class="fas fa-download"></i></div>
+                <div class="action"><i class="fas fa-external-link-alt"></i></div>
             </a>
+
         </div>
 
         <div class="footer-declaration">
-            © Pinkoc | 2022-2026 
+            © Pinkoc | 2022-2026
         </div>
 
     </div>
@@ -864,6 +893,7 @@
             </div>
         </div>
     </div>
+
     <script>
         (function() {
             'use strict';
@@ -918,37 +948,6 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && langModal.classList.contains('active')) closeLangModal();
             });
-
-            // ===== 加入模态框 =====
-            const joinModal = document.getElementById('joinModal');
-            const joinCloseBtn = document.getElementById('modalCloseBtn');
-            const qqBtn = document.getElementById('qqBtn');
-            const discordBtn = document.getElementById('discordBtn');
-
-            function openJoinModal() {
-                joinModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeJoinModal() {
-                joinModal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            joinCloseBtn.addEventListener('click', closeJoinModal);
-            joinModal.addEventListener('click', function(e) {
-                if (e.target === joinModal) closeJoinModal();
-            });
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && joinModal.classList.contains('active')) closeJoinModal();
-            });
-
-            if (joinUsBtn) {
-                joinUsBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openJoinModal();
-                });
-            }
 
             // ===== 初始化 =====
             const savedTheme = getStoredTheme();
