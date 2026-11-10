@@ -1180,8 +1180,8 @@
             <div class="nav-links">
                 <a href="index.html"><i class="fas fa-home"></i> 首页</a>
                 <a href="resources.html"><i class="fas fa-folder"></i> 资源</a>
-                <a href="mc.html"><i class="fas fa-wifi"></i> MC</a>
-                <a href="projects.html"><i class="fas fa-code"></i> 项目</a>
+               <!-- <a href="mc.html"><i class="fas fa-wifi"></i> MC</a> -->
+                <a href="project.html"><i class="fas fa-code"></i> 项目</a>
                 <a href="about.html"><i class="fas fa-exclamation-circle"></i> 关于</a>
             </div>
         </div>
@@ -1214,9 +1214,9 @@
             <button class="btn btn-primary" id="joinServerBtn">
                 🎮 加入我们
             </button>
-            <a href="./Wiki/Pinkoc/index.html" class="btn btn-secondary" id="wikiBtn">
+            <!--<a href="./Wiki/Pinkoc/index.html" class="btn btn-secondary" id="wikiBtn">
                 📚 Wiki
-            </a>
+            </a>-->
         </div>
 
         <div class="intro-cards">
@@ -1233,27 +1233,19 @@
             <div class="intro-card">
                 <div class="card-text">
                     <h3><i class="fas fa-microchip"></i> 飞舞硬件</h3>
-                    <p><span class="highlight">不止网络！</span> 服务器完全采用 <span class="highlight">ESP32</span>，让你的创意<span class="highlight">卡到不行</span></p>
+                    <p><span class="highlight">不止网络！</span> 服务器完全采用 <span class="highlight">土豆</span>，让你的创意<span class="highlight">卡到不行</span></p>
                 </div>
                 <div class="card-image">
-                    <img src="fvvserver.png" alt="硬件" />
+                    <img src="fvvserver.jpg" alt="硬件" />
                 </div>
             </div>
 
-            <div class="intro-card">
-                <div class="card-text">
-                    <h3><i class="fas fa-users"></i> 黑客社区</h3>
-                    <p>在这里，<span class="highlight">每一位玩家</span> 都是黑客。定期进行抄家、共建火箭，<span class="highlight">句句不离妈</span> 是我们的底色。</p>
-                </div>
-                <div class="card-image">
-                    <img src="fuckc.png" alt="社区" />
-                </div>
-            </div>
 
             <div class="intro-card">
                 <div class="card-text">
-                    <h3><i class="fas fa-compass"></i> 探索冒险</h3>
-                    <p>神秘遗迹、浮夸地形——<span class="highlight">服务器</span> 的<span class="highlight">地狱</span>，<span class="highlight">征服服务器</span>，书写属于你土豆。</p>
+                    <h3><i class="fas fa-compass"></i> 屎山代码</h3>
+                    <p>神秘变量，随便取名——<span class="highlight">接手</span> 的<span class="highlight">地狱</span>，<span class="highlight">征服屎山代码</span>，编写属于你的屎山。</p>
+                    <o>并没有使用Claude和GPT(实际上是DeepSeek伪装的)</o>
                 </div>
                 <div class="card-image">
                     <img src="potatoserver.png" alt="冒险" />
@@ -1275,11 +1267,8 @@
 
         <div class="footer-icons">
             <a href="https://github.com/0TMenf" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://bilibili.com" target="_blank" aria-label="Bilibili"><i class="fab fa-bilibili"></i></a>
             <a href="https://qm.qq.com/q/lRuaApp57O" target="_blank" aria-label="QQ"><i class="fab fa-qq"></i></a>
             <a href="https://discord.gg/aGJXhF2j" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
-            <a href="https://twitter.com" target="_blank" aria-label="X"><i class="fab fa-twitter"></i></a>
-            <a href="https://youtube.com" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
 
         <div class="footer-declaration">
@@ -1373,7 +1362,7 @@
             });
 
             const flipEl = document.getElementById('flipText');
-            const wordList = ['MC服', '网站', '游戏', '插件', '模组'];
+            const wordList = ['MC服', '项目', '网络', '硬件', '代码', '屎山', '土豆'];
             let currentIndex = 0;
             let isFlipping = false;
             let flipInterval = null;
